@@ -8,10 +8,10 @@ A starting suite of tests is provided to ensure proper functionality, but they a
 still in active development to consider the new postquantum implementations.  
 
 This package was modified for hcd, a full-node implementation of Hc which
-is under active development by Hybrid.Network.
+is under active development by h.cash.
 
 This package was originally developed for hcd, a full-node implementation of Hcd which
-is under active development by Company 0.  Although it was primarily written for
+is under active development.  Although it was primarily written for
 hcd, this package has intentionally been designed so it can be used as a
 standalone package for any projects needing the functionality provided.
 
