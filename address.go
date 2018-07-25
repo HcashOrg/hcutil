@@ -863,3 +863,8 @@ func (a *AddressBlissPubKey) Net() *chaincfg.Params {
 func NewAddressBlissPubKeyCompressed(pubkey chainec.PublicKey, params *chaincfg.Params) (*AddressBlissPubKey, error) {
 	return NewAddressBlissPubKey(pubkey.SerializeCompressed(), params)
 }
+
+// PubKey returns the underlying public key for the address.
+func (a *AddressBlissPubKey) PubKey() chainec.PublicKey {
+	return a.pubKey
+}

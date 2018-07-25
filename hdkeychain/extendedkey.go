@@ -26,7 +26,7 @@ import (
 	"github.com/HcashOrg/hcd/chaincfg"
 	"github.com/HcashOrg/hcd/chaincfg/chainec"
 	"github.com/HcashOrg/hcd/chaincfg/chainhash"
-	dcrcrypto "github.com/HcashOrg/hcd/crypto/bliss"
+	hccrypto "github.com/HcashOrg/hcd/crypto/bliss"
 	"github.com/HcashOrg/hcutil"
 	"github.com/HcashOrg/hcutil/base58"
 	"golang.org/x/crypto/sha3"
@@ -398,7 +398,7 @@ func (k *ExtendedKey) ECPubKey() (chainec.PublicKey, error) {
 	if k.algtype == keyEc {
 		return chainec.Secp256k1.ParsePubKey(k.pubKeyBytes())
 	} else if k.algtype == keyBliss {
-		return dcrcrypto.Bliss.ParsePubKey(k.pubKeyBytes())
+		return hccrypto.Bliss.ParsePubKey(k.pubKeyBytes())
 	}
 	return nil, ErrUnknownAlg
 }
@@ -416,7 +416,7 @@ func (k *ExtendedKey) ECPrivKey() (chainec.PrivateKey, error) {
 		privKey, _ := chainec.Secp256k1.PrivKeyFromBytes(k.key)
 		return privKey, nil
 	} else if k.algtype == keyBliss {
-		privKey, _ := dcrcrypto.Bliss.PrivKeyFromBytes(k.key)
+		privKey, _ := hccrypto.Bliss.PrivKeyFromBytes(k.key)
 		return privKey, nil
 	}
 	return nil, ErrUnknownAlg
@@ -644,6 +644,10 @@ func NewKeyFromString(key string) (*ExtendedKey, error) {
 			}
 		case algtype == keyBliss:
 			// TODO
+			_, err := hccrypto.Bliss.ParsePubKey(keyData)
+			if err != nil {
+				return nil, err
+			}
 		default:
 			return nil, ErrUnknownAlg
 		}
