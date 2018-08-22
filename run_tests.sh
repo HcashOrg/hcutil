@@ -38,8 +38,8 @@ docker pull decred/$DOCKER_IMAGE_TAG
 
 docker run --rm -it -v $(pwd):/src decred/$DOCKER_IMAGE_TAG /bin/bash -c "\
   rsync -ra --filter=':- .gitignore'  \
-  /src/ /go/src/github.com/decred/$REPO/ && \
-  cd github.com/decred/$REPO/ && \
+  /src/ /go/src/github.com/hcd/$REPO/ && \
+  cd github.com/hcd/$REPO/ && \
   glide install && \
   go install \$(glide novendor) && \
   $TESTCMD
